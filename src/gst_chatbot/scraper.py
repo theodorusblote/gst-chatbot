@@ -1,4 +1,5 @@
-import requests, time
+import requests
+import time, pprint
 
 s = requests.Session()
 s.headers.update({
@@ -12,7 +13,7 @@ ROOT = "Mode=topic&Action=inject&TOC=01%3AGoods%20and%20services%20tax"  # GST r
 
 def fetch(query: str) -> list[dict]:
     """Perform a GET request to the ATO browse-content endpoint."""
-    r = s.get(BASE + query, timeout=10)
+    r = s.get(BASE + query, timeout=(3.05, 27))  # connect timeout (3.05) is the number of seconds Requests will wait for the client to establish a connection. read timeout (27) is the number of seconds the client will wait for the server to send a response
     r.raise_for_status()
     return r.json()
 
@@ -30,4 +31,4 @@ def walk(query: str, depth: int = 0):
 
 # fetch BASE + ROOT
 all_gst_docs = list(walk(ROOT))
-print(f"\nDocs found: {len(all_gst_docs)}")
+pprint.pprint(all_gst_docs)

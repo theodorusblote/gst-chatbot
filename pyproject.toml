@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.13"
 requests = "^2.32.4"
+bs4 = "^0.0.2"
+notebook = "^7.4.4"
 
 
 [build-system]
